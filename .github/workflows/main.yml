@@ -54,7 +54,7 @@ jobs:
            username: ${{ secrets.JIRASERVER_USERNAME }}
            password: ${{ secrets.JIRASERVER_PASSWORD }}
            xrayCloud: "false"
-           xrayBaseUrl: "https://jira.dev.igt.com/"
+           xrayBaseUrl: ${{ secrets.JIRASERVER_BASE_URL }}
            testFormat: "junit"
            testPaths: "**/reports/*.xml"
            testPlanKey: "${{ secrets.XRAYSERVER_TEST_PLAN_KEY }}"
