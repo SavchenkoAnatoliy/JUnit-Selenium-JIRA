@@ -54,25 +54,8 @@ jobs:
            username: ${{ secrets.JIRASERVER_USERNAME }}
            password: ${{ secrets.JIRASERVER_PASSWORD }}
            xrayCloud: "false"
-           xrayBaseUrl: ${{ secrets.JIRASERVER_BASE_URL }}
+           xrayBaseUrl: "https://jira.dev.igt.com/"
            testFormat: "junit"
            testPaths: "**/reports/*.xml"
            testPlanKey: "${{ secrets.XRAYSERVER_TEST_PLAN_KEY }}"
            projectKey: "${{ secrets.JIRASERVER_PROJECT_KEY }}"
-      - name: "Import results to Xray (cloud) using maven plugin"
-        if: ${{ false }}
-        run: mvn -s $GITHUB_WORKSPACE/.github/workflows/maven-settings.xml app.getxray:xray-maven-plugin:import-results -Dxray.cloud=true -Dxray.clientId=${{ secrets.XRAYCLOUD_CLIENT_ID }} -Dxray.clientSecret=${{ secrets.XRAYCLOUD_CLIENT_SECRET }} -Dxray.projectKey=${{ secrets.JIRACLOUD_PROJECT_KEY }} -Dxray.testPlanKey=${{ secrets.XRAYCLOUD_TEST_PLAN_KEY }}
-        env:
-          GH_USERNAME: ${{ secrets.GH_USERNAME }}
-          GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
-      - name: "Import results to Xray (cloud) using a GH action"
-        if: ${{ false }}
-        uses: mikepenz/xray-action@v2.3.0
-        with:
-           username: "${{ secrets.XRAYCLOUD_CLIENT_ID }}"
-           password: "${{ secrets.XRAYCLOUD_CLIENT_SECRET }}"
-           xrayCloud: "true"
-           testFormat: "junit"
-           testPaths: "**/reports/*.xml"
-           testPlanKey: "${{ secrets.XRAYCLOUD_TEST_PLAN_KEY }}"
-           projectKey: "${{ secrets.JIRACLOUD_PROJECT_KEY }}"
