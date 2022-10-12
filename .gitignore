@@ -6,7 +6,6 @@ cloud_auth.json
 .classpath
 .project
 .settings
-target/
 **/*.class
 reports/*
 settings.xml
