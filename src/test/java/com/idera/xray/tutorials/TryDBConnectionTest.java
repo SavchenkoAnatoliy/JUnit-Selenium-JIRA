@@ -67,4 +67,25 @@ public class TryDBConnectionTest {
         }
         xrayReporter.addComment("Connection success");
     }
+
+    @Test
+    @XrayTest(key = "EINSTPIN-694")
+    public void  apiAccessICS(XrayTestReporter xrayReporter) throws SQLException {
+        xrayReporter.addComment("Creating statment");
+        String query = "select * from pas.free_ticket";
+        stmt = con.createStatement();
+        xrayReporter.addComment("Executing statment");
+        ResultSet rs = stmt.executeQuery(query);
+        assertEquals(rs.next(), true);
+        int count = 0;
+        while(rs.next() && count != 10) {
+            xrayReporter.addComment(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4));
+            System.out.print(rs.getString(1));
+            System.out.print(" " + rs.getString(2));
+            System.out.print(" " + rs.getString(3));
+            System.out.println(" " + rs.getString(4));
+            count++;
+        }
+        xrayReporter.addComment("Connection First 10 rows printed successfully");
+    }
 }
