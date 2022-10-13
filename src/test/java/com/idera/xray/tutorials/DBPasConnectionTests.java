@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @ExtendWith(XrayTestReporterParameterResolver.class)
-public class TryDBConnectionTest {
+public class DBPasConnectionTests {
     // Connection object
     static Connection con = null;
     // Statement object
@@ -86,6 +86,6 @@ public class TryDBConnectionTest {
             System.out.println(" " + rs.getString(4));
             count++;
         }
-        xrayReporter.addComment("Connection First 10 rows printed successfully");
+        xrayReporter.addComment("----- First 10 rows printed successfully -----");
     }
 }
