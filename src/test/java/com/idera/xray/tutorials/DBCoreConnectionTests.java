@@ -90,4 +90,26 @@ public class DBCoreConnectionTests {
         }
         xrayReporter.addComment("----- Last Row printed successfully -----");
     }
+
+    @Test
+    @XrayTest(key = "EINSTPIN-698")
+    public void   checkSkinInDB(XrayTestReporter xrayReporter) throws SQLException {
+        xrayReporter.addComment("Creating statment");
+        String query = "select * from core.skin_code";
+        stmt = con.createStatement();
+        xrayReporter.addComment("Executing statment");
+        ResultSet rs = stmt.executeQuery(query);
+        assertEquals(rs.next(), true);
+        xrayReporter.addComment("----- Last SKIN CODE print start -----");
+        while(rs.next()) {
+            if (rs.isLast()){
+                xrayReporter.addComment(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5));
+                System.out.print(rs.getString(1));
+                System.out.print(" " + rs.getString(2));
+                System.out.print(" " + rs.getString(3));
+                System.out.println(" " + rs.getString(5));
+            }
+        }
+        xrayReporter.addComment("----- Last SKIN CODE printed successfully -----");
+    }
 }
