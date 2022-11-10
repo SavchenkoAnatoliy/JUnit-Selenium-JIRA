@@ -9,6 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.sql.*;
 
@@ -29,6 +30,13 @@ public class DBPasConnectionTests {
     public static String DB_PASSWORD = "pas";
     // Repository
     RepositoryParser repo;
+    public static WebDriverWait wait;
+    //IMPORTANT: EVERY TIME THE JACKPOT GROUP CODE SHOULD BE NEW, NO WAY TO DELETE THIS CODE
+    public static String jackpotGroupCode = "BBBC";
+    //MSJJackpotGroupName
+    public static String MSJJackpotGroupName = "AutomationMSJ";
+    public static String query;
+    public static ResultSet rs;
 
     @BeforeEach
     public void setup() {
@@ -61,7 +69,7 @@ public class DBPasConnectionTests {
         String query = "select * from pas.pocket_type";
         stmt = con.createStatement();
         xrayReporter.addComment("Executing statment");
-        ResultSet rs = stmt.executeQuery(query);
+        rs = stmt.executeQuery(query);
         while(rs.next()) {
             assertEquals(rs.getString(1), repo.getBy("testdbconnection.azdev02db.pas"));
         }
@@ -75,7 +83,7 @@ public class DBPasConnectionTests {
         String query = "select * from pas.free_ticket";
         stmt = con.createStatement();
         xrayReporter.addComment("Executing statment");
-        ResultSet rs = stmt.executeQuery(query);
+        rs = stmt.executeQuery(query);
         assertEquals(rs.next(), true);
         int count = 0;
         while(rs.next() && count != 10) {
@@ -88,4 +96,6 @@ public class DBPasConnectionTests {
         }
         xrayReporter.addComment("----- First 10 rows printed successfully -----");
     }
+
+
 }
